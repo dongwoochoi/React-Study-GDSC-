@@ -15,7 +15,6 @@
 
 #main .container {
   max-width: 2007px;
-  margin-left: 7rem;
   margin-right: 7rem;
   padding: 0px;
 }
@@ -26,4 +25,7 @@
 .end {
   opacity : 1;
   transition : opacity 0.5s;
+}
+.page_name{
+  margin-left: 3rem;
 }

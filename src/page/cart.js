@@ -1,8 +1,15 @@
-import { useState } from "react";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'react-bootstrap';
+import { useSelector, useDispatch } from "react-redux";
+import {addCount} from '../store.js'
 
 function Cart(){
+
+    let a =  useSelector((state)=> state)
+    let dispatch = useDispatch()
+    console.log(a.stock)
+
     return (
         <div>
             <Table>
@@ -15,12 +22,18 @@ function Cart(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>안녕</td>
-                        <td>안녕</td>
-                        <td>안녕</td>
+                {
+                    a.stock.map((aa, i)=>
+                    <tr key={i}>
+                        <td>{a.stock[i].id}</td>
+                        <td>{a.stock[i].name}</td>
+                        <td>{a.stock[i].count}</td>
+                        <td>
+                        <button onClick={()=>{ dispatch(addCount(a.stock[i].id)) }}>+</button>
+                        </td>
                     </tr>
+                    )
+                }
                 </tbody>
             </Table> 
         </div>
