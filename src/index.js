@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from './store.js';
-import { QueryClient, QueryClientProvider } from "react-query"  //1번
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'   //1번
 const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

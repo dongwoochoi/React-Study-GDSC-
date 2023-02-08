@@ -11,6 +11,7 @@ import {Navbar, Container, Nav } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import {  Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query';
 
 //Style
 import './App.css';
@@ -19,11 +20,17 @@ import './App.css';
 
 function App() {
 
+  let pack = JSON.parse(localStorage.getItem('watched'))
 
   let [shoes, set_shoes] = useState(data)
   let navigate = useNavigate();
   let [btn, setBtn] = useState(2);
   let [btnState, setBtnState] = useState(true);
+
+  let result = useQuery('작명', ()=>
+    axios.get('https://codingapple1.github.io/userdata.json')
+    .then((a)=>{ return a.data })
+  )
 
   return (
     <div id="main" className="App">
@@ -34,6 +41,13 @@ function App() {
             <Nav.Link href="#home">Menu1</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/cart') }}>Cart</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/detail') }} >Detail</Nav.Link>
+          </Nav>
+          <Nav className='ms-auto'>
+            <div>
+              { result.isLoading && '로딩중' }
+              { result.error && '에러남' }
+              { result.data && result.data.name }
+            </div>
           </Nav>
         </Container>
       </Navbar>
